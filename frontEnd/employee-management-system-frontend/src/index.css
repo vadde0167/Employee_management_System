@@ -1,0 +1,17 @@
+/* Bootstrap overrides and custom styles can be added here */
+body {
+  background-color: #f8f9fa;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}
+
+/* Fix for Bootstrap modal backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}

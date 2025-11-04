@@ -1,0 +1,147 @@
+@baseUrl = http://localhost:5003
+
+### Auth endpoints
+### Login to get JWT token
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin123"
+}
+
+### Store the token from login response
+@authToken = {{login.response.body.token}}
+
+### 1. Test WeatherForecast (No Auth Required)
+GET {{baseUrl}}/WeatherForecast
+
+### 2. Get All Employees (Protected - Requires Admin Role)
+GET {{baseUrl}}/api/Employees
+Authorization: Bearer {{authToken}}
+
+### 3. Create New Employee
+POST {{baseUrl}}/api/Employees
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "department": "IT",
+    "position": "Developer",
+    "salary": 75000,
+    "dateOfJoining": "2023-10-19",
+    "phoneNumber": "1234567890",
+    "status": "Active"
+}
+
+### 4. Get Employee by ID (after creating, replace {id} with the actual ID)
+GET {{baseUrl}}/api/Employees/1
+
+### 5. Update Employee (replace {id} with actual ID)
+PUT {{baseUrl}}/api/Employees/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.updated@example.com",
+    "department": "IT",
+    "position": "Senior Developer",
+    "salary": 85000,
+    "dateOfJoining": "2023-10-19",
+    "phoneNumber": "1234567890",
+    "status": "Active"
+}
+
+### 6. Delete Employee (replace {id} with actual ID)
+DELETE {{baseUrl}}/api/Employees/1
+
+# First, let's add some sample employees for testing
+
+### Add Employee 1 - IT Department
+POST {{baseUrl}}/api/Employees
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "department": "IT",
+    "position": "Senior Developer",
+    "salary": 95000,
+    "dateOfJoining": "2024-01-15",
+    "phoneNumber": "1234567890",
+    "status": "Active"
+}
+
+### Add Employee 2 - HR Department
+POST {{baseUrl}}/api/Employees
+Content-Type: application/json
+
+{
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "email": "jane.smith@example.com",
+    "department": "HR",
+    "position": "HR Manager",
+    "salary": 85000,
+    "dateOfJoining": "2024-03-01",
+    "phoneNumber": "2345678901",
+    "status": "Active"
+}
+
+### Add Employee 3 - Finance Department
+POST {{baseUrl}}/api/Employees
+Content-Type: application/json
+
+{
+    "firstName": "Robert",
+    "lastName": "Johnson",
+    "email": "robert.johnson@example.com",
+    "department": "Finance",
+    "position": "Financial Analyst",
+    "salary": 78000,
+    "dateOfJoining": "2024-06-15",
+    "phoneNumber": "3456789012",
+    "status": "Active"
+}
+
+### Add Employee 4 - IT Department
+POST {{baseUrl}}/api/Employees
+Content-Type: application/json
+
+{
+    "firstName": "Emily",
+    "lastName": "Brown",
+    "email": "emily.brown@example.com",
+    "department": "IT",
+    "position": "Frontend Developer",
+    "salary": 82000,
+    "dateOfJoining": "2024-09-01",
+    "phoneNumber": "4567890123",
+    "status": "Active"
+}
+
+### Add Employee 5 - Marketing Department
+POST {{baseUrl}}/api/Employees
+Content-Type: application/json
+
+{
+    "firstName": "Michael",
+    "lastName": "Wilson",
+    "email": "michael.wilson@example.com",
+    "department": "Marketing",
+    "position": "Marketing Manager",
+    "salary": 88000,
+    "dateOfJoining": "2025-01-15",
+    "phoneNumber": "5678901234",
+    "status": "Active"
+}
+
+# Download Employee Report
+### Download PDF Report with all employees
+GET {{baseUrl}}/api/Reports/download

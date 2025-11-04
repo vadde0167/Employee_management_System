@@ -1,0 +1,425 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a237e 0%, #311b92 50%, #880e4f 100%);
+    background-size: 200% 200%;
+    animation: gradientMove 15s ease infinite;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-container::before,
+.login-container::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.login-container::before {
+    background-image: 
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 10%),
+        radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 15%),
+        radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.1) 0%, transparent 20%);
+    animation: shimmerBg 15s linear infinite;
+}
+
+/* Snow effect */
+.login-container::after {
+    background-image: 
+        radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
+        radial-gradient(2px 2px at 40% 70%, rgba(255, 255, 255, 0.7) 50%, transparent 50%),
+        radial-gradient(3px 3px at 50% 50%, rgba(255, 255, 255, 0.6) 50%, transparent 50%),
+        radial-gradient(2px 2px at 60% 20%, rgba(255, 255, 255, 0.7) 50%, transparent 50%),
+        radial-gradient(2px 2px at 70% 90%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
+        radial-gradient(3px 3px at 80% 40%, rgba(255, 255, 255, 0.6) 50%, transparent 50%),
+        radial-gradient(2px 2px at 90% 60%, rgba(255, 255, 255, 0.7) 50%, transparent 50%);
+    background-size: 600px 600px;
+    animation: snowFall 15s linear infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmerBg {
+    0%, 100% { transform: scale(1); opacity: 0.1; }
+    50% { transform: scale(1.2); opacity: 0.2; }
+}
+
+@keyframes snowFall {
+    0% {
+        background-position: 0 0;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        background-position: 600px 600px;
+        opacity: 0;
+    }
+}
+
+/* Add multiple snow layers for depth effect */
+@keyframes snowFallLayer2 {
+    0% {
+        background-position: 0 0;
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        background-position: -600px 600px;
+        opacity: 0;
+    }
+}
+
+.snow-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(1.5px 1.5px at 25% 35%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 45% 65%, rgba(255, 255, 255, 0.7) 50%, transparent 50%),
+        radial-gradient(2px 2px at 55% 45%, rgba(255, 255, 255, 0.6) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 65% 25%, rgba(255, 255, 255, 0.7) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 75% 85%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
+        radial-gradient(2px 2px at 85% 35%, rgba(255, 255, 255, 0.6) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 95% 55%, rgba(255, 255, 255, 0.7) 50%, transparent 50%);
+    background-size: 400px 400px;
+    animation: snowFallLayer2 12s linear infinite;
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.6s ease-out forwards;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.login-box h1 {
+    color: #2d3748;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.login-box h1::before {
+    content: '🔐';
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 1rem;
+    animation: swingIcon 2s ease-in-out infinite;
+}
+
+.login-box h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #4f46e5, #7c3aed);
+    border-radius: 2px;
+    animation: expandLine 0.6s ease-out forwards;
+}
+
+@keyframes swingIcon {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+@keyframes expandLine {
+    from { width: 0; }
+    to { width: 60px; }
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    color: #4a5568;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.form-group label::before {
+    content: attr(data-icon);
+    font-size: 1.25rem;
+}
+
+label[for="username"]::before {
+    content: '👤';
+}
+
+label[for="password"]::before {
+    content: '🔑';
+}
+
+.form-group input {
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    transform: translateY(-1px);
+}
+
+.form-group input:hover {
+    border-color: #7c3aed;
+}
+
+.form-group input.error {
+    border-color: #ff4444;
+}
+
+.error-text {
+    color: #ff4444;
+    font-size: 12px;
+}
+
+.error-message {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(248, 113, 113, 0.1));
+    color: #dc2626;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    text-align: center;
+    border: 1px solid rgba(220, 38, 38, 0.2);
+    margin-bottom: 1.5rem;
+    animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translateX(-1px); }
+    20%, 80% { transform: translateX(2px); }
+    30%, 50%, 70% { transform: translateX(-4px); }
+    40%, 60% { transform: translateX(4px); }
+}
+
+button[type="submit"] {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+button[type="submit"]:hover::before {
+    animation: shine 1.5s infinite;
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+button[type="submit"]:disabled {
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.loading button[type="submit"] {
+    position: relative;
+    color: transparent;
+}
+
+.loading button[type="submit"]::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.input-disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Form Animation */
+.form-group {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.form-group:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.form-group:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 1rem;
+    }
+    
+    .login-box {
+        padding: 1.5rem;
+    }
+    
+    .login-box h1 {
+        font-size: 1.5rem;
+    }
+    
+    .login-box h1::before {
+        font-size: 1.5rem;
+    }
+    
+    .form-group label {
+        font-size: 0.8125rem;
+    }
+    
+    .form-group input {
+        padding: 0.625rem 0.875rem;
+        font-size: 0.9375rem;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .login-box {
+        background: rgba(17, 24, 39, 0.95);
+    }
+    
+    .login-box h1 {
+        color: #e5e7eb;
+    }
+    
+    .form-group label {
+        color: #d1d5db;
+    }
+    
+    .form-group input {
+        background: rgba(17, 24, 39, 0.8);
+        border-color: #374151;
+        color: #e5e7eb;
+    }
+    
+    .form-group input:focus {
+        border-color: #6366f1;
+        background: rgba(17, 24, 39, 0.95);
+    }
+    
+    .error-message {
+        background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(248, 113, 113, 0.2));
+        color: #fca5a5;
+    }
+}
